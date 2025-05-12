@@ -8,10 +8,14 @@ Nel mio caso ho utilizzato un Raspberry Pi 3B+ alimentato con un hat PoE sul qua
 > **/canale <n_canale> <messaggio>** _Invia il messaggio sul canale specificato Es: /canale 0 Ciao_
 
 > **/info** _Restuisce le informazioni del nodo locale_
+![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/info.PNG)
 
 > **/ultimi** _Restituisce l'elenco degli ultimi nodi ascoltati di recente_
+![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/ultimi.PNG)
 
 > **/posizione** _Restituisce la posizione GPS e altitudine del nodo locale_
+![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/posizione.PNG)
 
 > **/invia_a <id_nodo> <messaggio>** _Invia il messaggio al nodo specificato NB: l'ID nodo NON deve contenere il punto esclamativo "!"_
+![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/invia_a.PNG)
 
