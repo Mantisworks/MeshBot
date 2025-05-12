@@ -6,7 +6,7 @@ Nel mio caso ho utilizzato un Raspberry Pi 3B+ alimentato con un hat PoE sul qua
 ## Comandi principali del Bot Telegran
 > **/lora <messaggio>** _Invia il messaggio sul canale di default (3 secondario)_
 
-> **/canale <n_canale> <messaggio>** _Invia il messaggio sul canale specificato Es: /canale 0 Ciao_
+> **/canale <n_canale> <messaggio>** _Invia il messaggio sul canale LoRa specificato Es: /canale 0 Ciao_
 
 > **/info** _Restuisce le informazioni del nodo locale_
 ![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/info.PNG)
