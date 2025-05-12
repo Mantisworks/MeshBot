@@ -20,3 +20,10 @@ Nel mio caso ho utilizzato un Raspberry Pi 3B+ alimentato con un hat PoE sul qua
 > **/invia_a <id_nodo> <messaggio>** _Invia il messaggio al nodo specificato NB: l'ID nodo NON deve contenere il punto esclamativo "!"_
 ![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/invia_a.PNG)
 
+
+## Aggiunta dello script al Crontab
+Assicurati di modificare lo script add_cron_boot.sh, aggiungendo il path dello script .py
+1. Rendi eseguibile lo script:
+> chmod +x add_cron_boot.sh
+2. Eseguilo come root:
+> sudo ./add_cron_boot.sh
