@@ -1,7 +1,7 @@
 # MeshBot
 Script Python che legge il traffico dalla USB (/dev/ttyUSB0) e li reindirizza in un gruppo Telegram indicato. Lo script deve necessariamente girare sulla stessa piattaforma dove il Nodo LoRa e' collegato.
 Nel mio caso ho utilizzato un Raspberry Pi 3B+ alimentato con un hat PoE sul quale vi e' collegato un TTGO T-Beam via USB. Il Raspberry e' dotato di un hot-spot WiFi per permettere la comunicazione tra nodo e MQTT.
-![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/nodo.jpg | width=200)
+![alt text](https://github.com/Mantisworks/MeshBot/blob/main/img/nodo.jpg|width=200)
 
 
 ## Comandi principali del Bot Telegran
