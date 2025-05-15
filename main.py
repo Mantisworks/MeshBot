@@ -49,6 +49,19 @@ def restricted(func):
         return func(update, context, *args, **kwargs)
     return wrapper
 
+def _attempt_reconnect():
+    global lora_interface
+    logger.warning("Tentativo di riconnessione a LoRa...")
+    try:
+        pub.unsubscribe(on_receive, "meshtastic.receive")
+        if lora_interface:
+            lora_interface.close()
+        time.sleep(5)
+        start_lora_listener()
+        logger.info("Riconnesso a LoRa.")
+    except Exception as e:
+        logger.error(f"Errore durante la riconnessione: {e}")
+
 def send_message_lora(message: str, channel_index: int = 0):
     global lora_interface
     try:
@@ -57,13 +70,13 @@ def send_message_lora(message: str, channel_index: int = 0):
             return False
         if serial_lock.acquire(timeout=SERIAL_TIMEOUT):
             try:
-                logger.info(f"Invio su canale {channel_index}: {message}")
                 lora_interface.sendText(message, wantAck=False, channelIndex=channel_index)
             finally:
                 serial_lock.release()
         return True
     except Exception as e:
         logger.error(f"Errore nell'invio del messaggio LoRa: {e}")
+        _attempt_reconnect()
         return False
 
 #
@@ -193,6 +206,9 @@ def on_receive(packet, interface):
 def start_lora_listener():
     global lora_interface
     try:
+        if lora_interface:
+            lora_interface.close()
+            time.sleep(1)
         lora_interface = meshtastic.serial_interface.SerialInterface()
         pub.subscribe(on_receive, "meshtastic.receive")
         logger.info("Interfaccia LoRa inizializzata e in ascolto...")
@@ -204,14 +220,12 @@ def lora_watchdog():
     while not stop_event.is_set():
         time.sleep(60)
         try:
-            if lora_interface and not lora_interface.isConnected:
-                logger.warning("Watchdog: disconnessione rilevata. Riconnessione...")
-                pub.unsubscribe(on_receive, "meshtastic.receive")
-                lora_interface.close()
-                time.sleep(5)
-                start_lora_listener()
+            if not lora_interface or not lora_interface.isConnected:
+                logger.warning("Watchdog: disconnessione rilevata.")
+                _attempt_reconnect()
         except Exception as e:
             logger.error(f"Errore nel watchdog: {e}")
+            _attempt_reconnect()
 
 def get_local_node_id(interface):
     try:
